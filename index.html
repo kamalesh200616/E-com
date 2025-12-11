@@ -3,12 +3,54 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Static Web App</title>
+  <title>My Ecommerce Static Web App</title>
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-  <h1>🚀 Welcome to Azure Static Web Apps!</h1>
-  <p>This is a simple HTML site deployed from GitHub.</p>
-  <script src="script.js"></script>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="logo">MyShop</div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Products</a></li>
+      <li><a href="#">Cart</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <h1>🚀 Welcome to Azure Static Web Apps!</h1>
+    <p>Browse our products and enjoy seamless cloud deployment.</p>
+  </header>
+
+  <!-- Product Grid -->
+  <section class="products">
+    <div class="product-card">
+      <img src="https://via.placeholder.com/200" alt="Laptop">
+      <h2>Laptop</h2>
+      <p class="price">₹75,000</p>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://via.placeholder.com/200" alt="Smartphone">
+      <h2>Smartphone</h2>
+      <p class="price">₹25,000</p>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://via.placeholder.com/200" alt="Headphones">
+      <h2>Headphones</h2>
+      <p class="price">₹3,500</p>
+      <button>Add to Cart</button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 MyShop. Powered by Azure Static Web Apps.</p>
+  </footer>
 </body>
 </html>
