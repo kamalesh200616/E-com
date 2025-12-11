@@ -1,27 +1,45 @@
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("Static Web App is running!");
+  console.log("App loaded");
 
-  // Show a welcome message in the console
-  const hero = document.querySelector(".hero p");
-  hero.textContent = "Browse our products and enjoy seamless cloud deployment 🚀";
+  // Demo product data (replace with API calls later)
+  const products = [
+    { id: "p1", name: "Laptop", price: 75000, img: "https://via.placeholder.com/200" },
+    { id: "p2", name: "Smartphone", price: 25000, img: "https://via.placeholder.com/200" },
+    { id: "p3", name: "Headphones", price: 3500, img: "https://via.placeholder.com/200" }
+  ];
 
-  // Add click event to all "Add to Cart" buttons
-  const buttons = document.querySelectorAll(".product-card button");
-  buttons.forEach(button => {
-    button.addEventListener("click", () => {
-      const productName = button.parentElement.querySelector("h2").textContent;
-      alert(`${productName} added to cart!`);
+  // Render products if on products.html
+  const productList = document.getElementById("product-list");
+  if (productList) {
+    products.forEach(p => {
+      const card = document.createElement("div");
+      card.className = "product-card";
+      card.innerHTML = `
+        <img src="${p.img}" alt="${p.name}">
+        <h2>${p.name}</h2>
+        <p class="price">₹${p.price}</p>
+        <button data-id="${p.id}">Add to Cart</button>
+      `;
+      productList.appendChild(card);
     });
-  });
 
-  // Highlight product card on hover (extra visual feedback)
-  const cards = document.querySelectorAll(".product-card");
-  cards.forEach(card => {
-    card.addEventListener("mouseenter", () => {
-      card.style.boxShadow = "0 4px 12px rgba(0,0,0,0.2)";
+    // Add to cart
+    productList.addEventListener("click", e => {
+      if (e.target.tagName === "BUTTON") {
+        const id = e.target.dataset.id;
+        const product = products.find(p => p.id === id);
+        let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+        cart.push(product);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        alert(`${product.name} added to cart!`);
+      }
     });
-    card.addEventListener("mouseleave", () => {
-      card.style.boxShadow = "none";
-    });
-  });
+  }
+
+  // Render cart if on cart.html
+  const cartItems = document.querySelector("#cart-items ul");
+  if (cartItems) {
+    let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    cartItems.innerHTML = cart.map(item => `<li>${item.name} - ₹${item.price}</li>`).join("");
+  }
 });
