@@ -10,6 +10,5 @@ module.exports = async function (context, req) {
   const container = database.container("product");
 
   const { resources } = await container.items.readAll().fetchAll();
-
   context.res = { status: 200, body: resources };
 };
