@@ -6,15 +6,16 @@ module.exports = async function (context, req) {
     key: process.env.COSMOS_KEY
   });
 
-  const database = client.database("ecommerce");
-  const container = database.container("order");
+  const db = client.database("ecommerce");
+  const orders = db.container("order");
 
   if (req.method === "POST") {
-    const newOrder = req.body;
-    const { resource } = await container.items.create(newOrder);
+    const body = req.body || {};
+    const { resource } = await orders.items.create(body);
     context.res = { status: 201, body: resource };
-  } else {
-    const { resources } = await container.items.readAll().fetchAll();
-    context.res = { status: 200, body: resources };
+    return;
   }
+
+  const { resources } = await orders.items.readAll().fetchAll();
+  context.res = { status: 200, body: resources };
 };
